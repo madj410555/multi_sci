@@ -14,19 +14,12 @@ from hybrid import train_supconce
 from args import args
 from multihead import MultiModal
 
-if args.method == 'scl':
-    from scl import train_scl, linear_scl
-elif args.method == 'mscl':
-    from mscl import train_mscl, linear_mscl
-
 if not (os.path.isfile(os.path.join(args.datapath, args.metadata))):
     raise (IOError(f"CSV file {args.metadata} does not exist in {args.datapath}"))
 
 METHOD = args.method
-if args.dataset == 'ICBHI':  # for cross entropy
-    DEFAULT_NUM_CLASSES = 4
-elif args.dataset == 'SPRS':
-    DEFAULT_NUM_CLASSES = 7
+
+DEFAULT_NUM_CLASSES = 4
 DEFAULT_OUT_DIM = 128  # for ssl embedding space dimension
 DEFAULT_NFFT = 1024
 DEFAULT_NMELS = 64
@@ -36,7 +29,7 @@ DEFAULT_FMIN = 50
 DEFAULT_FMAX = 2000
 
 # Model definition
-model= MultiModal()
+model= MultiModal().to(args.device)
 s = summary(model, device=args.device)
 nparams = s.trainable_params
 

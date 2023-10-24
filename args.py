@@ -5,7 +5,7 @@ parser = argparse.ArgumentParser()
 #Generic
 parser.add_argument("--method", type=str, default='sl') #method in ['sl','scl','hybrid']
 parser.add_argument("--mscl", action='store_true') #use scl on metadata + scl on class
-parser.add_argument("--device", type=str, default="cpu") #device to train on
+parser.add_argument("--device", type=str, default="cuda") #device to train on
 parser.add_argument("--workers", type=int, default=3) #number of workers
 parser.add_argument("--bs", type=int, default=32) #batch size
 parser.add_argument("--epochs", type=int, default=100) #nb of epoches
